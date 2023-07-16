@@ -4,6 +4,8 @@ import { getCurrentUser } from "@/lib/session";
 import Modal from "@/components/Modal";
 import Link from "next/link";
 import Image from "next/image";
+import RelatedProjects from "@/components/RelatedProjects";
+import ProjectActions from "@/components/ProjectActions";
 
 
 const Project = async ({ params: { id } }: { params: { id: string } }) => {
@@ -17,7 +19,6 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
     const projectDetails = result?.project
 
     const renderLink = () => `/profile/${projectDetails?.createdBy?.id}`
-    console.log(result?.project)
   return (
     <Modal>
       <section className="flexBetween gap-y-8 max-w-4xl max-xs:flex-col w-full">
@@ -40,12 +41,17 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                 {projectDetails?.createdBy?.name}
               </Link>
               <Image src="/dot.svg" width={4} height={4} alt="dot" />
-              <Link href={`/?category=${projectDetails.category}`} className="text-primary-purple font-semibold">
+              <Link href={`/?category=${projectDetails?.category}`} className="text-primary-purple font-semibold">
                 {projectDetails?.category}
               </Link>
             </div>
           </div>
         </div>
+        {session?.user?.email === projectDetails?.createdBy?.email && (
+          <div className="flex justify-end items-center gap-2">
+            <ProjectActions projectId={projectDetails?.id} />
+          </div>
+        )}
       </section>
       <section className="mt-14">
         <Image src={projectDetails?.image} width={1064} height={800} alt="project image" className="object-cover rounded-xl"/>
@@ -75,6 +81,7 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
           </Link>
           <span className="w-full h-0.5 bg-light-white-200" />
         </section>
+        <RelatedProjects userId={projectDetails?.createdBy?.id} projectId={projectDetails?.id} />
     </Modal>
   )
 }
