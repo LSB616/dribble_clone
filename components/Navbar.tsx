@@ -13,7 +13,7 @@ const Navbar = async () => {
     <nav className="flexBetween navbar">
         <div className="flex-1 flexStart gap-10">
             <Link href="/">
-                <Image src="/logo.svg" width={115} height={43} alt="Flexibble" />
+                <Image src="/logo-purple.svg" width={115} height={43} alt="Flexibble" />
             </Link>
             <ul className="xl:flex hidden text-small gap-7">
                 {NavLinks.map((link) => (
