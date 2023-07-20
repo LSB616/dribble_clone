@@ -32,6 +32,7 @@ const jwt = auth.JWT({
   secret: g.env('NEXTAUTH_SECRET')
 })
 
+
 export default config({
   schema: g,
   auth: {
