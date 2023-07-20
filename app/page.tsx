@@ -4,29 +4,33 @@ import ProjectCard from "@/components/ProjectCard";
 import Categories from "@/components/Categories";
 import LoadMore from "@/components/LoadMore";
 
-type ProjectSearch = {
-    projectSearch: {
-        edges: { node: ProjectInterface}[]
-        pageInfo: {
-            hasPreviousPage: boolean;
-            hasNextPage: boolean;
-            startCursor: string;
-            endCursor: string;
-        }
-    }
-}
-
 type SearchParams = {
-    category?: string;
-    endCursor?: string;
-}
+    category?: string | null;
+    endcursor?: string | null;
+  }
+  
+  type Props = {
+    searchParams: SearchParams
+  }
+  
+  type ProjectSearch = {
+    projectSearch: {
+      edges: { node: ProjectInterface }[];
+      pageInfo: {
+        hasPreviousPage: boolean;
+        hasNextPage: boolean;
+        startCursor: string;
+        endCursor: string;
+      };
+    },
+  }
 
-type Props = {
-    searchParams: SearchParams;
-}
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+export const revalidate = 0;
 
-const Home = async ({ searchParams: { category, endCursor }}: Props) => {
-    const data = await fetchAllProjects(category, endCursor) as ProjectSearch
+const Home = async ({ searchParams: { category, endcursor } }: Props) => {
+    const data = await fetchAllProjects(category, endcursor) as ProjectSearch
 
     const projectsToDisplay = data?.projectSearch?.edges || [];
 
