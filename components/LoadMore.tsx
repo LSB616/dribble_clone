@@ -35,10 +35,7 @@ const LoadMore = ({ startCursor, endCursor, hasPreviousPage, hasNextPage }: Prop
   return (
     <div className="w-full flexCenter gap-5 mt-10">
       {hasPreviousPage && (
-        <>
         <Button title="Previous" handleClick={() => {handleNavigation('prev')}} type='button' />
-        <Button title="Next" handleClick={() => {handleNavigation('next')}} type='button'/>
-        </>
       )}
       {hasNextPage && (
         <Button title="Next" handleClick={() => {handleNavigation('next')}} type='button'/>
