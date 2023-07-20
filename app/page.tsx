@@ -17,13 +17,17 @@ type ProjectSearch = {
 }
 
 type SearchParams = {
-    category?: string | null;
-    endCursor?: string | null;
+    category?: string;
+    endCursor?: string;
 }
 
 type Props = {
     searchParams: SearchParams;
 }
+
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+export const revalidate = 0;
 
 const Home = async ({ searchParams: { category, endCursor }}: Props) => {
     const data = await fetchAllProjects(category, endCursor) as ProjectSearch
