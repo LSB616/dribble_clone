@@ -5,8 +5,8 @@ import Categories from "@/components/Categories";
 import LoadMore from "@/components/LoadMore";
 
 type SearchParams = {
-    category?: any;
-    endcursor?: any;
+    category?: string | null;
+    endcursor?: string | null;
   }
   
   type Props = {
@@ -29,7 +29,7 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 export const revalidate = 0;
 
-const Home = async ({ searchParams: { category, endcursor } }: Props) => {
+const Home = async ({ searchParams: { category = "", endcursor = "" } }: Props) => {
     const data = await fetchAllProjects(category, endcursor) as ProjectSearch
 
     const projectsToDisplay = data?.projectSearch?.edges || [];

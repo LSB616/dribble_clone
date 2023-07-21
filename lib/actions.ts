@@ -80,7 +80,7 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
     }
 }
 
-export const fetchAllProjects = (category?: any, endcursor?: any) => {
+export const fetchAllProjects = (category?: string | null, endcursor?: string | null) => {
     client.setHeader("x-api-key", apiKey);
   
     return makeGraphQLRequest(projectsQuery, { category, endcursor });
