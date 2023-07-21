@@ -34,7 +34,7 @@ const Home = async ({ searchParams: { category, endcursor } }: Props) => {
 
     const projectsToDisplay = data?.projectSearch?.edges || [];
 
-    if(projectsToDisplay.length === 0) {
+    if(projectsToDisplay.length === 0){
         return (
             <section className="flexStart flex-col paddings">
                 <Categories />
@@ -42,8 +42,6 @@ const Home = async ({ searchParams: { category, endcursor } }: Props) => {
             </section>
         )
     }
-
-    const pagination = data?.projectSearch?.pageInfo;
 
     return (
         <section className="flexStart flex-col paddings mb-16">
@@ -53,7 +51,12 @@ const Home = async ({ searchParams: { category, endcursor } }: Props) => {
                     <ProjectCard key={node?.id} id={node?.id} image={node?.image} title={node?.title} name={node?.createdBy?.name} avatarUrl={node?.createdBy?.avatarUrl} userId={node?.createdBy?.id} />
                 ))}
             </section>
-            <LoadMore startCursor={pagination.startCursor} endCursor={pagination.endCursor} hasPreviousPage={pagination.hasPreviousPage} hasNextPage={pagination.hasNextPage} />
+            <LoadMore 
+                  startCursor={data?.projectSearch?.pageInfo?.startCursor} 
+                  endCursor={data?.projectSearch?.pageInfo?.endCursor} 
+                  hasPreviousPage={data?.projectSearch?.pageInfo?.hasPreviousPage} 
+                  hasNextPage={data?.projectSearch?.pageInfo.hasNextPage}
+      />
         </section>
     )
 };
