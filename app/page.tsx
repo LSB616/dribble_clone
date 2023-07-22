@@ -30,7 +30,7 @@ export const dynamicParams = true;
 export const revalidate = 0;
 
 const Home = async ({ searchParams: { category = "", endcursor = "" } }: Props) => {
-    const data = category === "" ? await fetchAllProjects2(endcursor) as ProjectSearch : await fetchAllProjects(category, endcursor) as ProjectSearch
+    const data = category === "" ? await fetchAllProjects2() as ProjectSearch : await fetchAllProjects(category, endcursor) as ProjectSearch
 
     const projectsToDisplay = data?.projectSearch?.edges || [];
 
